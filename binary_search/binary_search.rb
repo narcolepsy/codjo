@@ -6,18 +6,28 @@ def chop(int, arr_of_int)
       return -1
    else
       lower = 0
+      if arr_of_int[lower] == int
+         return int
+      end
       upper = arr_of_int.length-1
+      if arr_of_int[upper] == int
+         return int
+      end
       found = -1
-      while found != int
+      while found != int do
       #go through the loop
-         mid = arr_of_int[((upper-lower)/2).floor]
+         mid = ((upper-lower)/2).floor
          puts mid
-         if (mid > int)
+         if (arr_of_int[mid] > int)
             upper = mid
-         elsif (mid > int)
+         elsif (arr_of_int[mid] > int)
             lower = mid
          elsif (upper == lower)
-            return arr_of_int[lower]
+            if (arr_of_int[lower] == int)
+               return arr_of_int[lower]
+            elsif
+               return -1
+            end
          else
             found = int
          end
