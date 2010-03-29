@@ -7,33 +7,42 @@ def chop(int, arr_of_int)
    else
       lower = 0
       if arr_of_int[lower] == int
-         return int
+         return lower
       end
       upper = arr_of_int.length-1
       if arr_of_int[upper] == int
-         return int
+         return upper
       end
       found = -1
-      while found != int do
+      while (1) #found != int 
       #go through the loop
-         mid = ((upper-lower)/2).floor
+         mid = ((upper-lower)/2.0).floor
          puts mid
          if (arr_of_int[mid] > int)
             upper = mid
-         elsif (arr_of_int[mid] > int)
+            puts "mid1 = #{lower} < #{mid} < #{upper}"
+         elsif (arr_of_int[mid] < int)
             lower = mid
-         elsif (upper == lower)
+            puts "mid2 = #{lower} < #{mid} < #{upper}"
+         else
+            puts "Found @ mid -> #{mid}"
+            return mid
+         end
+
+         if (upper == lower)
+            puts "arr_of_int = #{arr_of_int[lower]}"
             if (arr_of_int[lower] == int)
-               return arr_of_int[lower]
-            elsif
+               return lower
+            else
                return -1
             end
          else
             found = int
+            puts "found = #{found}"
          end
       end
    end
-   return found      
+   return mid
 end
 
 Test::Unit::UI::Console::TestRunner.run(BinSearchTest)
