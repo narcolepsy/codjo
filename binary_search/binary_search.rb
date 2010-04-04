@@ -16,8 +16,24 @@ def chop(int, arr_of_int)
       found = -1
       while (1) #found != int 
       #go through the loop
-         mid = ((upper-lower)/2.0).floor
+         mid = ((upper+lower)/2.0).floor
          puts mid
+            puts "mid6 = #{lower} < #{mid} < #{upper}"
+         if (upper == mid)
+            if (arr_of_int[upper] == int)
+               puts "MID == UPPER so returning mid"
+               return upper
+            else
+               return -1
+            end
+         elsif (lower == mid)
+            if (arr_of_int[lower] == int)
+               puts "MID == LOWER so returning mid"
+               return lower
+            else
+               return -1
+            end
+         end
          if (arr_of_int[mid] > int)
             upper = mid
             puts "mid1 = #{lower} < #{mid} < #{upper}"
@@ -29,10 +45,13 @@ def chop(int, arr_of_int)
             return mid
          end
 
-         if (upper == lower)
+         if (upper == lower) 
             puts "arr_of_int = #{arr_of_int[lower]}"
+            puts "arr_of_int = #{arr_of_int[upper]}"
             if (arr_of_int[lower] == int)
                return lower
+            elsif (arr_of_int[upper] == int)
+               return upper
             else
                return -1
             end
