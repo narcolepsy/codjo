@@ -12,7 +12,7 @@ end
 def print_board
    @grid.each_with_index do |i,index|
       print i
-      print "\n" if (index+1)%3==0      
+      print "\n" if (index+1)%(@width)==0      
    end
 end
 def find_space
@@ -20,8 +20,12 @@ def find_space
 end
 def up
 #make sure this is valid
+   puts"Attempting to move UP"
    curr_index = find_space
    if(curr_index - @width) > 0
+      @grid[curr_index] = @grid[curr_index - @width]
+      @grid[curr_index - @width] = "="
+      print_board
       return true
    else
       puts "Trying to go from index #{curr_index} to #{curr_index - @width}"
@@ -31,14 +35,49 @@ end
 
 def down
 #make sure this is valid
+   puts"Attempting to move DOWN"
    curr_index = find_space
    if(curr_index + @width) < @length
+      @grid[curr_index] = @grid[curr_index + @width]
+      @grid[curr_index + @width] = "="
+      print_board
       return true
    else
       puts "Trying to go from index #{curr_index} to #{curr_index + @width}"
       return false
    end
 end
+
+def left
+#makesure this is valid
+   puts"Attempting to move LEFT"
+   curr_index = find_space
+   if(curr_index % @width) == 0
+      puts "Trying to wrap the index round: not valid left"
+      return false
+   else
+      @grid[curr_index] = @grid[curr_index -1]
+      @grid[curr_index - 1] = "="
+      print_board
+      return true
+   end
+end
+
+def right
+#makesure this is valid
+   puts"Attempting to move RIGHT"
+   curr_index = find_space
+   if(curr_index % @width) == (@width-1)
+      puts "Trying to wrap the index round: not valid right"
+      return false
+   else
+      @grid[curr_index] = @grid[curr_index +1]
+      @grid[curr_index + 1] = "="
+      print_board
+      return true
+   end
+end
+
 
 end #class
 
@@ -47,6 +86,13 @@ puts a
 puts "Trying new array print method"
 a.print_board
 puts "Trying to find the array index for hole"
-puts a.find_space
-puts a.up
-puts a.down
+a.find_space
+a.up
+a.down
+a.right
+a.left
+
+#Try to solve it by doing moves by myself
+puts "BRISCOE SAYS GO UP!"
+a.up
+
