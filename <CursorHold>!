@@ -2,7 +2,7 @@ require 'test/unit/ui/console/testrunner'
 require './binary_test.rb'
 
 #def chop will return the index of the array that a specific search term lives at
-def chop(int, arr_of_int)
+def chop_old(int, arr_of_int)
   if arr_of_int.empty?
     puts 'ZERO ARRAY LENGTH'
     return -1
@@ -61,6 +61,23 @@ def chop(int, arr_of_int)
     end
   end
   return mid
+end
+
+def chop(int, arr_of_int, start_idx=0)
+  #We want to return -1 if the array is empty
+  return -1 if arr_of_int.empty?
+  #Return start idx (as we may be taking in a sliced array with non-zero start term
+  return start_idx if arr_of_int[0] == int
+  #Return end idx of split array
+  return start_idx+arr_of_int.length if arr_of_int[-1] == int
+  #Now decide which half of the split to look at and call chop on it again
+  #Floor the midway point
+  split_point = (arr_of_int.length/2.0).floor
+  if arr_of_int[split_point] < int
+    chop(int,arr_of_int[(split_point...arr_of_int.length)], split_point)
+  else
+    chop(int,arr_of_int[(0...split_point)], 0)
+  end
 end
 
 Test::Unit::UI::Console::TestRunner.run(BinSearchTest)
